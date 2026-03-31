@@ -1,0 +1,387 @@
+Script started on 2026-03-26 17:18:21+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="120" LINES="30"]
+root@eltex-practice2-pg1-v8:~# unalias -a 2>/dev/nullunalias -a 2>/dev/null
+root@eltex-practice2-pg1-v8:~# export TERM=dumbexport TERM=dumb
+root@eltex-practice2-pg1-v8:~# export NO_COLOR=1
+root@eltex-practice2-pg1-v8:~# set -x
+root@eltex-practice2-pg1-v8:~# date
++ date
+Thu Mar 26 05:18:58 PM UTC 2026
+root@eltex-practice2-pg1-v8:~# hostname
++ hostname
+eltex-practice2-pg1-v8
+root@eltex-practice2-pg1-v8:~# whoami
++ whoami
+root
+root@eltex-practice2-pg1-v8:~# ls -ld /root/.ssh
++ ls -ld /root/.ssh
+drwx------ 2 root root 4096 Mar 12  2025 /root/.ssh
+root@eltex-practice2-pg1-v8:~# ls -l /root/.ssh/authorized_keys
++ ls -l /root/.ssh/authorized_keys
+-rw------- 1 root root 112 Mar 12 12:29 /root/.ssh/authorized_keys
+root@eltex-practice2-pg1-v8:~# cat /root/.ssh/authorized_keys
++ cat /root/.ssh/authorized_keys
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICZNkzQPG666gTKkX2tYtwkP45GuourUic+aWwwyGcKP eltex-pg1-v8@eltex-2026-spring
+root@eltex-practice2-pg1-v8:~# getent passwd user1
++ getent passwd user1
+user1:x:1001:1001::/home/user1:/bin/bash
+root@eltex-practice2-pg1-v8:~# getent passwd user1 2
++ getent passwd user2
+user2:x:1002:1002:,,,:/home/user2:/bin/bash
+root@eltex-practice2-pg1-v8:~# getent passwd user2 3
++ getent passwd user3
+user3:x:1003:1003:,,,:/home/user3:/usr/sbin/nologin
+root@eltex-practice2-pg1-v8:~# ls -ld /home/user1 /home/user2 /home/user3
++ ls -ld /home/user1 /home/user2 /home/user3
+drwxr-x--- 3 user1 user1 4096 Mar 26 17:18 /home/user1
+drwxr-x--- 2 user2 user2 4096 Mar 12 12:42 /home/user2
+drwxr-x--- 2 user3 user3 4096 Mar 12 13:32 /home/user3
+root@eltex-practice2-pg1-v8:~# grep '^user3:' /etc/passwd
++ grep '^user3:' /etc/passwd
+user3:x:1003:1003:,,,:/home/user3:/usr/sbin/nologin
+root@eltex-practice2-pg1-v8:~# su user3
++ su user3
+This account is currently not available.
+root@eltex-practice2-pg1-v8:~# 
+root@eltex-practice2-pg1-v8:~# su user3
++ su user3
+This account is currently not available.
+root@eltex-practice2-pg1-v8:~# su -s /bin/bash user3 -c 'whoami; echo $SHELL'
++ su -s /bin/bash user3 -c 'whoami; echo $SHELL'
+user3
+/bin/bash
+root@eltex-practice2-pg1-v8:~# groupadd sharegrp
++ groupadd sharegrp
+root@eltex-practice2-pg1-v8:~# usermod -aG sharegrp user1
++ usermod -aG sharegrp user1
+root@eltex-practice2-pg1-v8:~# usermod -aG sharegrp user1 2
++ usermod -aG sharegrp user2
+root@eltex-practice2-pg1-v8:~# usermod -aG sharegrp user2 3
++ usermod -aG sharegrp user3
+root@eltex-practice2-pg1-v8:~# groups user1
++ groups user1
+user1 : user1 sharegrp
+root@eltex-practice2-pg1-v8:~# groups user1 2
++ groups user2
+user2 : user2 users sharegrp
+root@eltex-practice2-pg1-v8:~# groups user2 3
++ groups user3
+user3 : user3 users sharegrp
+root@eltex-practice2-pg1-v8:~# id user1
++ id user1
+uid=1001(user1) gid=1001(user1) groups=1001(user1),1004(sharegrp)
+root@eltex-practice2-pg1-v8:~# id user1 2
++ id user2
+uid=1002(user2) gid=1002(user2) groups=1002(user2),100(users),1004(sharegrp)
+root@eltex-practice2-pg1-v8:~# id user2 3
++ id user3
+uid=1003(user3) gid=1003(user3) groups=1003(user3),100(users),1004(sharegrp)
+root@eltex-practice2-pg1-v8:~# mkdir -p /opt/share
++ mkdir -p /opt/share
+root@eltex-practice2-pg1-v8:~# chgrp sharegrp /opt/share
++ chgrp sharegrp /opt/share
+root@eltex-practice2-pg1-v8:~# chmod 2775 /opt/share
++ chmod 2775 /opt/share
+root@eltex-practice2-pg1-v8:~# ls -ld /opt/share
++ ls -ld /opt/share
+drwxrwsr-x 2 root sharegrp 4096 Mar 26 17:20 /opt/share
+root@eltex-practice2-pg1-v8:~# stat /opt/share
++ stat /opt/share
+  File: /opt/share
+  Size: 4096      	Blocks: 8          IO Block: 4096   directory
+Device: 252,0	Inode: 525026      Links: 2
+Access: (2775/drwxrwsr-x)  Uid: (    0/    root)   Gid: ( 1004/sharegrp)
+Access: 2026-03-26 17:20:46.984441724 +0000
+Modify: 2026-03-26 17:20:46.984441724 +0000
+Change: 2026-03-26 17:20:56.046632584 +0000
+ Birth: 2026-03-26 17:20:46.984441724 +0000
+root@eltex-practice2-pg1-v8:~# echo 'umask 027' >> /home/user1/.profile
++ echo 'umask 027'
+root@eltex-practice2-pg1-v8:~# chown user1:user1 /home/user1/.profile
++ chown user1:user1 /home/user1/.profile
+root@eltex-practice2-pg1-v8:~# tail -n 5 /home/user1/.profile
++ tail -n 5 /home/user1/.profile
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+umask 027
+root@eltex-practice2-pg1-v8:~# su - user1 -c 'umask'
++ su - user1 -c umask
+0027
+root@eltex-practice2-pg1-v8:~# rm -f /opt/share/*
++ rm -f '/opt/share/*'
+root@eltex-practice2-pg1-v8:~# su - user1 -c 'touch /opt/share/user1_file && ls -l /opt/share'
++ su - user1 -c 'touch /opt/share/user1_file && ls -l /opt/share'
+total 0
+-rw-r----- 1 user1 sharegrp 0 Mar 26 17:21 user1_file
+root@eltex-practice2-pg1-v8:~# su - user2 -c 'touch /opt/share/user2_file && ls -l /opt/share'
++ su - user2 -c 'touch /opt/share/user2_file && ls -l /opt/share'
+total 0
+-rw-r----- 1 user1 sharegrp 0 Mar 26 17:21 user1_file
+-rw-rw-r-- 1 user2 sharegrp 0 Mar 26 17:21 user2_file
+root@eltex-practice2-pg1-v8:~# su -s /bin/bash user3 -c 'touch /opt/share/user3_file && ls -l /opt/share'
++ su -s /bin/bash user3 -c 'touch /opt/share/user3_file && ls -l /opt/share'
+total 0
+-rw-r----- 1 user1 sharegrp 0 Mar 26 17:21 user1_file
+-rw-rw-r-- 1 user2 sharegrp 0 Mar 26 17:21 user2_file
+-rw-rw-r-- 1 user3 sharegrp 0 Mar 26 17:21 user3_file
+root@eltex-practice2-pg1-v8:~# su - user1 -c 'rm -fv /opt/share/user2_file'
++ su - user1 -c 'rm -fv /opt/share/user2_file'
+removed '/opt/share/user2_file'
+root@eltex-practice2-pg1-v8:~# su - user2 -c 'rm -fv /opt/share/user3_file'
++ su - user2 -c 'rm -fv /opt/share/user3_file'
+removed '/opt/share/user3_file'
+root@eltex-practice2-pg1-v8:~# su -s /bin/bash user3 -c 'rm -fv /opt/share/user1_file'
++ su -s /bin/bash user3 -c 'rm -fv /opt/share/user1_file'
+removed '/opt/share/user1_file'
+root@eltex-practice2-pg1-v8:~# ls -l /opt/share
++ ls -l /opt/share
+total 0
+root@eltex-practice2-pg1-v8:~# rm -f /opt/share/*
++ rm -f '/opt/share/*'
+root@eltex-practice2-pg1-v8:~# chmod 3775 /opt/share
++ chmod 3775 /opt/share
+root@eltex-practice2-pg1-v8:~# ls -ld /opt/share
++ ls -ld /opt/share
+drwxrwsr-t 2 root sharegrp 4096 Mar 26 17:22 /opt/share
+root@eltex-practice2-pg1-v8:~# stat /opt/share
++ stat /opt/share
+  File: /opt/share
+  Size: 4096      	Blocks: 8          IO Block: 4096   directory
+Device: 252,0	Inode: 525026      Links: 2
+Access: (3775/drwxrwsr-t)  Uid: (    0/    root)   Gid: ( 1004/sharegrp)
+Access: 2026-03-26 17:22:11.656210674 +0000
+Modify: 2026-03-26 17:22:06.377101279 +0000
+Change: 2026-03-26 17:22:24.217470516 +0000
+ Birth: 2026-03-26 17:20:46.984441724 +0000
+root@eltex-practice2-pg1-v8:~# su - user1 -c 'touch /opt/share/user1_file && ls -l /opt/share'
++ su - user1 -c 'touch /opt/share/user1_file && ls -l /opt/share'
+total 0
+-rw-r----- 1 user1 sharegrp 0 Mar 26 17:22 user1_file
+root@eltex-practice2-pg1-v8:~# su - user2 -c 'touch /opt/share/user2_file && ls -l /opt/share'
++ su - user2 -c 'touch /opt/share/user2_file && ls -l /opt/share'
+total 0
+-rw-r----- 1 user1 sharegrp 0 Mar 26 17:22 user1_file
+-rw-rw-r-- 1 user2 sharegrp 0 Mar 26 17:22 user2_file
+root@eltex-practice2-pg1-v8:~# su -s /bin/bash user3 -c 'touch /opt/share/user3_file && ls -l /opt/share'
++ su -s /bin/bash user3 -c 'touch /opt/share/user3_file && ls -l /opt/share'
+total 0
+-rw-r----- 1 user1 sharegrp 0 Mar 26 17:22 user1_file
+-rw-rw-r-- 1 user2 sharegrp 0 Mar 26 17:22 user2_file
+-rw-rw-r-- 1 user3 sharegrp 0 Mar 26 17:22 user3_file
+root@eltex-practice2-pg1-v8:~# su - user1 -c 'rm -fv /opt/share/user2_file'
++ su - user1 -c 'rm -fv /opt/share/user2_file'
+rm: cannot remove '/opt/share/user2_file': Operation not permitted
+root@eltex-practice2-pg1-v8:~# su - user2 -c 'rm -fv /opt/share/user3_file'
++ su - user2 -c 'rm -fv /opt/share/user3_file'
+rm: cannot remove '/opt/share/user3_file': Operation not permitted
+root@eltex-practice2-pg1-v8:~# su -s /bin/bash user3 -c 'rm -fv /opt/share/user1_file'
++ su -s /bin/bash user3 -c 'rm -fv /opt/share/user1_file'
+rm: cannot remove '/opt/share/user1_file': Operation not permitted
+root@eltex-practice2-pg1-v8:~# ls -l /opt/share
++ ls -l /opt/share
+total 0
+-rw-r----- 1 user1 sharegrp 0 Mar 26 17:22 user1_file
+-rw-rw-r-- 1 user2 sharegrp 0 Mar 26 17:22 user2_file
+-rw-rw-r-- 1 user3 sharegrp 0 Mar 26 17:22 user3_file
+root@eltex-practice2-pg1-v8:~# printf 'user1 ALL=(root) NOPASSWD: /usr/bin/dmesg\n' > /etc/sudoers.d/user1_dmesg
++ printf 'user1 ALL=(root) NOPASSWD: /usr/bin/dmesg\n'
+root@eltex-practice2-pg1-v8:~# chmod 440 /etc/sudoers.d/user1_dmesg
++ chmod 440 /etc/sudoers.d/user1_dmesg
+root@eltex-practice2-pg1-v8:~# visudo -cf /etc/sudoers.d/user1_dmesg
++ visudo -cf /etc/sudoers.d/user1_dmesg
+/etc/sudoers.d/user1_dmesg: parsed OK
+root@eltex-practice2-pg1-v8:~# su - user1 -c 'sudo /usr/bin/dmesg | head'
++ su - user1 -c 'sudo /usr/bin/dmesg | head'
+[    0.000000] Linux version 6.8.0-55-generic (buildd@lcy02-amd64-095) (x86_64-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #57-Ubuntu SMP PREEMPT_DYNAMIC Wed Feb 12 23:42:21 UTC 2025 (Ubuntu 6.8.0-55.57-generic 6.8.12)
+[    0.000000] Command line: BOOT_IMAGE=/vmlinuz-6.8.0-55-generic root=/dev/mapper/ubuntu--vg-ubuntu--lv ro
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Hygon HygonGenuine
+[    0.000000]   Centaur CentaurHauls
+[    0.000000]   zhaoxin   Shanghai  
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+root@eltex-practice2-pg1-v8:~# cat > /usr/local/bin/dmesg_suid.sh <<'EOF'
+> #!/bin/bash
+> /usr/bin/dmesg
+> EOF
++ cat
+root@eltex-practice2-pg1-v8:~# chown root:root /usr/local/bin/dmesg_suid.sh
++ chown root:root /usr/local/bin/dmesg_suid.sh
+root@eltex-practice2-pg1-v8:~# chmod 4755 /usr/local/bin/dmesg_suid.sh
++ chmod 4755 /usr/local/bin/dmesg_suid.sh
+root@eltex-practice2-pg1-v8:~# ls -l /usr/local/bin/dmesg_suid.sh
++ ls -l /usr/local/bin/dmesg_suid.sh
+-rwsr-xr-x 1 root root 27 Mar 26 17:23 /usr/local/bin/dmesg_suid.sh
+root@eltex-practice2-pg1-v8:~# su - user2 -c '/usr/local/bin/dmesg_suid.sh | head'
++ su - user2 -c '/usr/local/bin/dmesg_suid.sh | head'
+dmesg: read kernel buffer failed: Operation not permitted
+root@eltex-practice2-pg1-v8:~# chage -M 10 user1
++ chage -M 10 user1
+root@eltex-practice2-pg1-v8:~# chage -M 10 user2
++ chage -M 10 user2
+root@eltex-practice2-pg1-v8:~# chage -M 10 user3
++ chage -M 10 user3
+root@eltex-practice2-pg1-v8:~# chage -l user1
++ chage -l user1
+Last password change					: Mar 26, 2026
+Password expires					: Apr 05, 2026
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 10
+Number of days of warning before password expires	: 7
+root@eltex-practice2-pg1-v8:~# chage -l user2
++ chage -l user2
+Last password change					: Mar 26, 2026
+Password expires					: Apr 05, 2026
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 10
+Number of days of warning before password expires	: 7
+root@eltex-practice2-pg1-v8:~# chage -l user2 3
++ chage -l user3
+Last password change					: Mar 26, 2026
+Password expires					: Apr 05, 2026
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 10
+Number of days of warning before password expires	: 7
+root@eltex-practice2-pg1-v8:~# echo 'Костоломов Александр Евгеньевич' > /etc/motd
++ echo 'Костоломов Александр Евгеньевич'
+root@eltex-practice2-pg1-v8:~# cat /etc/motd
++ cat /etc/motd
+Костоломов Александр Евгеньевич
+root@eltex-practice2-pg1-v8:~# mkdir -p /root/etc_backup
++ mkdir -p /root/etc_backup
+root@eltex-practice2-pg1-v8:~# rsync -aL /etc/ /root/etc_backup/
++ rsync -aL /etc/ /root/etc_backup/
+root@eltex-practice2-pg1-v8:~# ls -ld /root/etc_backup
++ ls -ld /root/etc_backup
+drwxr-xr-x 109 root root 4096 Mar 26 17:24 /root/etc_backup
+root@eltex-practice2-pg1-v8:~# ls /root/etc_backup | head
++ head
++ ls /root/etc_backup
+adduser.conf
+alternatives
+apparmor
+apparmor.d
+apport
+apt
+bash.bashrc
+bash_completion
+bash_completion.d
+bindresvport.blacklist
+root@eltex-practice2-pg1-v8:~# command -v bzip2
++ command -v bzip2
+/usr/bin/bzip2
+root@eltex-practice2-pg1-v8:~# command -v 7z
++ command -v 7z
+/usr/bin/7z
+root@eltex-practice2-pg1-v8:~# tar -czf /root/etc_backup.tar.gz -C /root etc_backup
++ tar -czf /root/etc_backup.tar.gz -C /root etc_backup
+root@eltex-practice2-pg1-v8:~# tar -cjf /root/etc_backup.tar.bz2 -C /root etc_backup
++ tar -cjf /root/etc_backup.tar.bz2 -C /root etc_backup
+root@eltex-practice2-pg1-v8:~# cd /root && 7z a /root/etc_backup.7z etc_backup
++ cd /root
++ 7z a /root/etc_backup.7z etc_backup
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:2 OPEN_MAX:1024
+
+Scanning the drive:
+  0M Scan           244 folders, 1511 files, 38705312 bytes (37 MiB)
+
+Creating archive: /root/etc_backup.7z
+
+Add new data to archive: 244 folders, 1511 files, 38705312 bytes (37 MiB)
+
+  0%      9% 1468 + etc_backup/alternatives/ex                                       16% 1468 + etc_backup/alternatives/ex                                       20% 1478 + etc_backup/alternatives/lzma                                         24% 1478 + etc_backup/alternatives/lzma                                         30% 1487 + etc_backup/alternatives/rview                                          33% 1487 + etc_backup/alternatives/rview                                          38% 1488 + etc_backup/alternatives/rvim                                         42% 1488 + etc_backup/alternatives/rvim                                         46% 1488 + etc_backup/alternatives/rvim                                         50% 1492 + etc_backup/alternatives/vi                                       54% 1492 + etc_backup/alternatives/vi                                       59% 1493 + etc_backup/alternatives/view                                         62% 1493 + etc_backup/alternatives/view                                         64% 1494 + etc_backup/alternatives/vim                                        72% 1494 + etc_backup/alternatives/vim                                        76% 1494 + etc_backup/alternatives/vim                                        80% 1495 + etc_backup/alternatives/vimdiff                                            82% 1495 + etc_backup/alternatives/vimdiff                                            86% 1495 + etc_backup/alternatives/vimdiff                                            90% 1497 + etc_backup/rmt                           94% 1497 + etc_backup/rmt                           99% 1497 + etc_backup/rmt                          
+Files read from disk: 1497
+Archive size: 4678101 bytes (4569 KiB)
+Everything is Ok
+root@eltex-practice2-pg1-v8:~# cd /root
++ cd /root
+root@eltex-practice2-pg1-v8:~# ls -lh /root/etc_backup.tar.gz /root/etc_backup.tar.bz2 /root/etc_backup.7z
++ ls -lh /root/etc_backup.tar.gz /root/etc_backup.tar.bz2 /root/etc_backup.7z
+-rw-r--r-- 1 root root 4.5M Mar 26 17:25 /root/etc_backup.7z
+-rw-r--r-- 1 root root  17M Mar 26 17:25 /root/etc_backup.tar.bz2
+-rw-r--r-- 1 root root  18M Mar 26 17:25 /root/etc_backup.tar.gz
+root@eltex-practice2-pg1-v8:~# date > /etc/motd
++ date
+root@eltex-practice2-pg1-v8:~# cat /etc/motd
++ cat /etc/motd
+Thu Mar 26 05:25:59 PM UTC 2026
+root@eltex-practice2-pg1-v8:~# rsync -aL /etc/ /root/etc_backup/
++ rsync -aL /etc/ /root/etc_backup/
+root@eltex-practice2-pg1-v8:~# tar -czf /root/etc_backup.tar.gz -C /root etc_backup
++ tar -czf /root/etc_backup.tar.gz -C /root etc_backup
+root@eltex-practice2-pg1-v8:~# ls -lh /root/etc_backup.tar.gz
++ ls -lh /root/etc_backup.tar.gz
+-rw-r--r-- 1 root root 18M Mar 26 17:26 /root/etc_backup.tar.gz
+root@eltex-practice2-pg1-v8:~# mkdir -p /root/etc_backup_bz2_check
++ mkdir -p /root/etc_backup_bz2_check
+root@eltex-practice2-pg1-v8:~# tar -xjf /root/etc_backup.tar.bz2 -C /root/etc_backup_bz2_check
++ tar -xjf /root/etc_backup.tar.bz2 -C /root/etc_backup_bz2_check
+root@eltex-practice2-pg1-v8:~# diff -r /root/etc_backup /root/etc_backup_bz2_check/etc_backup | head
++ head
++ diff -r /root/etc_backup /root/etc_backup_bz2_check/etc_backup
+diff -r /root/etc_backup/motd /root/etc_backup_bz2_check/etc_backup/motd
+1c1
+< Thu Mar 26 05:25:59 PM UTC 2026
+---
+> Костоломов Александр Евгеньевич
+File /root/etc_backup/systemd/system-generators/systemd-gpt-auto-generator is a character special file while file /root/etc_backup_bz2_check/etc_backup/systemd/system-generators/systemd-gpt-auto-generator is a character special file
+root@eltex-practice2-pg1-v8:~# mkdir -p /root/etc_backup_gzip
++ mkdir -p /root/etc_backup_gzip
+root@eltex-practice2-pg1-v8:~# mkdir -p /root/etc_backup_7zip
++ mkdir -p /root/etc_backup_7zip
+root@eltex-practice2-pg1-v8:~# tar -xzf /root/etc_backup.tar.gz -C /root/etc_backup_gzip
++ tar -xzf /root/etc_backup.tar.gz -C /root/etc_backup_gzip
+root@eltex-practice2-pg1-v8:~# 7z x /root/etc_backup.7z -o/root/etc_backup_7zip
++ 7z x /root/etc_backup.7z -o/root/etc_backup_7zip
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:2 OPEN_MAX:1024
+
+Scanning the drive for archives:
+  0M Scan /root/                1 file, 4678101 bytes (4569 KiB)
+
+Extracting archive: /root/etc_backup.7z
+--
+Path = /root/etc_backup.7z
+Type = 7z
+Physical Size = 4678101
+Headers Size = 20939
+Method = LZMA2:24 BCJ
+Solid = +
+Blocks = 2
+
+  0%     83% 1718         Everything is Ok
+
+Folders: 244
+Files: 1511
+Size:       38705312
+Compressed: 4678101
+root@eltex-practice2-pg1-v8:~# find /root/etc_backup_gzip -name motd
++ find /root/etc_backup_gzip -name motd
+/root/etc_backup_gzip/etc_backup/motd
+root@eltex-practice2-pg1-v8:~# find /root/etc_backup_7zip -name motd
++ find /root/etc_backup_7zip -name motd
+/root/etc_backup_7zip/etc_backup/motd
+root@eltex-practice2-pg1-v8:~# diff /root/etc_backup_gzip/etc_backup/motd /root/etc_backup_7zip/etc_backup/motd
++ diff /root/etc_backup_gzip/etc_backup/motd /root/etc_backup_7zip/etc_backup/motd
+1c1
+< Thu Mar 26 05:25:59 PM UTC 2026
+---
+> Костоломов Александр Евгеньевич
+root@eltex-practice2-pg1-v8:~# set +x
++ set +x
+root@eltex-practice2-pg1-v8:~# exit
+exit
+
+Script done on 2026-03-26 17:27:44+00:00 [COMMAND_EXIT_CODE="0"]

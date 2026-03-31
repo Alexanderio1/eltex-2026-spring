@@ -1,0 +1,168 @@
+#1773241109
+export HISTFILE="${USER}_part.log"
+#1773241125
+touch "$HISTFILE"
+#1773241330
+echo $HISTFILESIZE
+#1773242814
+ls -A ~ | grep '^\.'
+#1773242841
+ls -a ~ | grep '^\.'
+#1773242848
+ls -A ~ | grep '^\.'
+#1773242906
+export HISTTIMEFORMAT='%F %T '
+#1773242911
+history
+#1773243080
+date
+#1773243103
+history | tail
+#1773243460
+tail "${USER}_part.log"
+#1773244656
+echo "$HISTFILE"
+#1773244673
+ls -l "$HISTFILE"
+#1773244686
+date
+#1773244694
+history | tail
+#1773244731
+PROMPT_COMMAND='history -a'
+#1773244754
+pwd
+#1773244762
+history | tail
+#1773244781
+tail "$HISTFILE"
+#1773245064
+DATE=$(+%T)
+#1773245082
+DATE=$(date +%T)
+#1773245110
+DATE=$(date +%F)
+#1773245116
+echo $DATE
+#1773245138
+TIME=$(date +%T)
+#1773245144
+echo $TIME
+#1773245196
+DATE_TIME="$DATE $TIME"
+#1773245203
+echo $DATE_TIME
+#1773245263
+ls /bin /sbin | grep '[0-9]'
+#1773247653
+PS1='${USER}@${HOSTNAME}-$(date +%H:%M)> '
+#1773247675
+export PS1
+#1773248369
+echo $$ $PPID
+#1773248406
+ps -f
+#1773248436
+ps -f -p $$ -p $PPID
+#1773249431
+mkdir -p ~/"$(date +%Y)"-{1..12}
+#1773249451
+ls
+#1773249490
+cat 2026-1
+#1773250879
+cd ~
+#1773250923
+touch "${USER}_part3.log"
+#1773251014
+echo 'mkdir -p D1/D2/D3' >> "${USER}_part3.log"
+#1773251035
+mkdir -p D1/D2/D3
+#1773251154
+echo 'touch D1/D2/file.txt' >> "${USER}_part3.log"
+#1773251175
+touch D1/D2/file.txt
+#1773251285
+echo "echo 'test text' > D1/D2/file.txt" >> "${USER}_part3.log"
+#1773251315
+echo 'test text' > D1/D2/file.txt
+#1773251418
+echo 'ln -s ../file.txt D1/D2/D3/file_sym.txt' >> "${USER}_part3.log"
+#1773251451
+ln -s ../file.txt D1/D2/D3/file_sym.txt
+#1773252864
+echo 'ln D1/D2/file.txt D1/D2/D3/file_hard.txt' >> "${USER}_part3.log"
+#1773252902
+ln D1/D2/file.txt D1/D2/D3/file_hard.txt
+#1773253056
+echo 'ls -li D1/D2/file.txt D1/D2/D3/file_sym.txt D1/D2/D3/file_hard.txt' >> "${USER}_part3.log"
+#1773253130
+ls -li D1/D2/file.txt D1/D2/D3/file_sym.txt D1/D2/D3/file_hard.txt
+#1773254194
+echo 'cat D1/D2/D3/file_sym.txt D1/D2/D3/file_hard.txt' >> "${USER}_part3.log"
+#1773254222
+cat D1/D2/D3/file_sym.txt D1/D2/D3/file_hard.txt
+#1773254249
+echo 'mv D1/D2/file.txt D1/file.txt' >> "${USER}_part3.log"
+#1773254276
+mv D1/D2/file.txt D1/file.txt
+#1773254322
+echo 'cat D1/D2/D3/file_sym.txt' >> "${USER}_part3.log"
+#1773254341
+cat D1/D2/D3/file_sym.txt
+#1773254370
+echo 'cat D1/D2/D3/file_hard.txt' >> "${USER}_part3.log"
+#1773254389
+cat D1/D2/D3/file_hard.txt
+#1773254425
+echo 'rm -r D1/D2' >> "${USER}_part3.log"
+#1773254433
+rm -r D1/D2
+#1773254462
+echo 'find / -type f -size +20M 2>/dev/null > "${USER}_part3_gt50M.log"' >> "${USER}_part3.log"
+#1773254499
+find / -type f -size +20M 2>/dev/null > "${USER}_part3_gt50M.log"
+#1773254528
+echo 'while IFS= read -r f; do du -h "$f"; done < "${USER}_part3_gt50M.log"' >> "${USER}_part3.log"
+#1773254538
+while IFS= read -r f; do du -h "$f"; done < "${USER}_part3_gt50M.log"
+#1773254562
+echo 'find ~ -type f -mtime -1' >> "${USER}_part3.log"
+#1773254583
+find ~ -type f -mtime -1
+#1773254622
+echo 'which find' >> "${USER}_part3.log"
+#1773254638
+which find
+#1773254665
+echo 'file "$(which find)"' >> "${USER}_part3.log"
+#1773254676
+file "$(which find)"
+#1773254725
+echo 'file /boot/initrd.img*' >> "${USER}_part3.log"
+#1773254733
+file /boot/initrd.img*
+#1773254765
+logout
+#1773254772
+exit
+#1773248084
+PS1='${USER}@${HOSTNAME}-$(date +%H:%M)> '
+#1773248087
+export PS1
+#1773248098
+bash --norc
+#1773254777
+q
+#1773254785
+exit
+#1773247964
+bash --norc
+#1773254789
+logout
+#1773254792
+exit
+#1773247680
+bash
+#1773254795
+exit
