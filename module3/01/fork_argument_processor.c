@@ -17,7 +17,7 @@ static void process_range(char *argv[], int start, int end, const char *who) {
     for (int i = start; i < end; i++) {
         double value;
         if (is_number(argv[i], &value)) {
-            printf("%s: \"%s\" -> %g\n", who, argv[i], value * 2.0);
+            printf("%s: \"%s\" -> %.10g\n", who, argv[i], value * 2.0);
         } else {
              printf("%s: \"%s\"\n", who , argv[i]);
         }
