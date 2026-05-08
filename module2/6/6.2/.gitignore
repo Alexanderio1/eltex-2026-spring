@@ -1,0 +1,6 @@
+build/
+library/*.so
+contact_book
+*.o
+*.a
+*.exe
