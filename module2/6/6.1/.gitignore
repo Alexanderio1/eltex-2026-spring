@@ -1,0 +1,5 @@
+build/
+library/*.a
+contact_book
+*.o
+*.exe
