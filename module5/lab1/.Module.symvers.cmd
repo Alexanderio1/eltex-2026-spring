@@ -1,1 +1,0 @@
-savedcmd_/root/eltex-2026-spring/module5/lab1/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /root/eltex-2026-spring/module5/lab1/Module.symvers -T /root/eltex-2026-spring/module5/lab1/modules.order -i Module.symvers -e 
