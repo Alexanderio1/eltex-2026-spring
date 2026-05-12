@@ -1,0 +1,1 @@
+savedcmd_/root/eltex-2026-spring/module5/lab1/hello.mod := printf '%s\n'   hello.o | awk '!x[$$0]++ { print("/root/eltex-2026-spring/module5/lab1/"$$0) }' > /root/eltex-2026-spring/module5/lab1/hello.mod
