@@ -8,7 +8,6 @@
 #include <linux/module.h> 
 #include <linux/poll.h> 
 #include <linux/uaccess.h>
-#include <linux/version.h>
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Kostolomov \"Alexanderio1\" Alexander");
