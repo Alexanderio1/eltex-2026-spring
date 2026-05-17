@@ -1,0 +1,1 @@
+cmd_/home/alexanderio/eltex/module5/lab4/Module.symvers := sed 's/\.ko$$/\.o/' /home/alexanderio/eltex/module5/lab4/modules.order | scripts/mod/modpost -m -a  -o /home/alexanderio/eltex/module5/lab4/Module.symvers -e -i Module.symvers   -T -

@@ -104,13 +104,8 @@ static int __init chardev_init(void) {
         return major; 
     } 
     printk(KERN_INFO "I was assigned major number %d.\n", major); 
- 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 4, 0)
-    cls = class_create(DEVICE_NAME);
-#else
-    cls = class_create(THIS_MODULE, DEVICE_NAME);
-#endif
 
+    cls = class_create(THIS_MODULE, DEVICE_NAME);
     device_create(cls, NULL, MKDEV(major, 0), NULL, DEVICE_NAME); 
     printk(KERN_INFO "Device created on /dev/%s\n", DEVICE_NAME); 
 
