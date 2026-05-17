@@ -1,2 +1,0 @@
-/home/alexanderio/eltex/module5/lab4/chardev.o
-

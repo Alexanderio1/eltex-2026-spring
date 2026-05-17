@@ -1,1 +1,0 @@
-cmd_/home/alexanderio/eltex/module5/lab4/chardev.ko := ld -r -EL  -maarch64elf -z noexecstack --build-id=sha1  -T scripts/module.lds -o /home/alexanderio/eltex/module5/lab4/chardev.ko /home/alexanderio/eltex/module5/lab4/chardev.o /home/alexanderio/eltex/module5/lab4/chardev.mod.o;  true
